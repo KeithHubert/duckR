@@ -74,6 +74,8 @@ Above but with UI and error logic:
         isOpen,
     },
     ducks: {
+        isFetching,
+        error,
         [duckID]: {
             lastUpdated,
             info: {
