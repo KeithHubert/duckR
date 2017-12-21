@@ -222,3 +222,46 @@ function feed (state, action) {
             return state
     }
 }
+
+//Listeners 
+
+export default function Listeners (state = {}, action) {
+    switch (action.type) {
+        case ADD_LISTENER :
+            return {
+                ...state,
+                [action.listenerId] : true,
+            }
+        default :
+            return state
+    }
+}
+
+//MODAL
+
+const initialState = {
+    duckText: '',
+    isOpen: false,
+}
+
+export default function modal (state = initialState, action) {
+    switch (action.type) {
+        case OPEN_MODAL :
+            return {
+                ...state,
+                isOpen: true,
+            }
+        case CLOSE_MODAL :
+            return {
+                duckText: '',
+                isOpen: false, 
+            }
+        case UPDATE_DUCK_TEXT:
+            return {
+                ...state,
+                duckText: action.newDuckText,
+            }
+        default :
+            return state
+    }
+}
