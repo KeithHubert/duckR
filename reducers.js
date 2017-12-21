@@ -172,3 +172,53 @@ function ducks (state, action) {
     }
 
 }
+
+// FEEDS REDUCER
+
+const initialState = {
+    isFetching: false,
+    newDucksAvailable: false,
+    newDucksToAdd: [],
+    error: '',
+    duckIds: [],
+}
+
+function feed (state, action) {
+    switch (action.type) {
+        case SETTING_FEED_LISTENER : 
+            return {
+                ...state,
+                isFetching: true,
+            }
+        case SETTING_FEED_LISTENER_ERROR :
+            return {
+                ...state,
+                isFetching: false,
+                error: action.error,
+            }
+        case SETTING_FEED_LISTENER_SUCCESS :
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+                duckIds: action.duckIds,
+                newDucksAvailable: false,
+            }
+        case ADD_NEW_DUCK_ID_TO_FEED :
+            //Return brand new array using mixing in new duck ID to newDucksToAdd array
+            return {
+                ...state,
+                newDucksToAdd: [action.duckId, ...state.newDucksToAdd]
+            }
+        case RESET_NEW_DUCKS_AVAILABLE :
+            //Take all ducks from newDucksToAdd, add them to duckIds with all the old ones as well (news feed)
+            return {
+                ...state,
+                duckIds: [...state.newDucksToAdd, ...state.duckIds],
+                newDucksToAdd: [],
+                newDucksAvailable: false,
+            }
+        default :
+            return state
+    }
+}
