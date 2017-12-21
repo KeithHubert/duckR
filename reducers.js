@@ -53,6 +53,9 @@
 // [action.uid]: user(state[action.uid], action)
 // ________
 
+
+// USER REDUCERS
+
 const initialUserState = {
     lastUpdated: 0,
     info: {
@@ -123,4 +126,49 @@ function users (state = initialState, action) {
         default :
             return state
     }
+}
+
+// DUCKS REDUCER
+
+const initialState = {
+    isFetching: true,
+    error: ''
+}
+
+function ducks (state, action) {
+    switch (action.type) {
+        case FETCHING_DUCK :
+            return {
+                ...state,
+                isFetching: true,
+            }
+        case ADD_DUCK :
+        case FETCHING_DUCK_SUCCESS :
+            return {
+                ...state,
+                error: '',
+                isFetching: false,
+                [action.duck.duckId]: action.duck,
+            }
+        case FETCHING_DUCK_ERROR :
+            return {
+                ...state,
+                isFetching: false,
+                error: action.error,
+            }
+        case REMOVE_FETCHING :
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+            }
+        case ADD_MULTIPLE_DUCKS :
+            return {
+                ...state,
+                ...action.ducks,
+            }
+        default :
+            return state
+    }
+
 }
