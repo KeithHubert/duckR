@@ -313,3 +313,64 @@ export default function usersLikes (state = initialState, action) {
             return state
     }
 }
+
+//likeCount
+
+//12:20, recap at 14:10 line 364
+
+// ADD_LIKE and REMOVE_LIKE: defined in usersLikes reducer, imported into likeCount reducer 
+// because every action triggers each reducer so they see eachother
+
+// Check to see if duckId has already been fetched = (typeof state[action.duckId] === 'undefined') 
+// If it has, modify it. New state returned is whatever state was but duckId will modify it's own count using 
+// count reducer (+1 / -1, 
+
+const initialState = {
+    isFetching: false,
+    error: '',
+}
+
+function count (state = 0, action) {
+    switch (action.type) {
+        case ADD_LIKE :
+            return state + 1
+        case REMOVE_LIKE :
+            return state - 1
+        default :
+            return state
+    }
+}
+
+export default function likeCount (state = initialState, action) {
+    switch (action.type) {
+        case FETCHING_COUNT :
+            return {
+                ...state,
+                isFetching: true,
+            }
+        case FETCHING_COUNT_ERROR :
+            return {
+                ...state,
+                isFetching: false,
+                error: action.error, 
+            }
+        case FETCHING_COUNT_SUCCESS : 
+        //Trick mixing in initialState so instead of putting in (isFectchingState: false, and error: '',)
+            return {
+                ...state,
+                ...initialState,
+                [action.duckId]: action.count,
+            }
+        case ADD_LIKE :
+        case REMOVE_LIKE :
+            return typeof state[action.duckId] === 'undefined'
+                ? state
+                : {
+                    ...state,
+                    [action.duckId]: count(state[action.duckId], action)
+                }
+        default :
+            return state
+    }
+}
+
