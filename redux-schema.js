@@ -56,76 +56,74 @@ Above but with UI and error logic:
 
 {
     users: {
-        isAuthed,
-        isFetching,
-        error,
-        authedId,
-        [uid]: {
-            lastUpdated,
-            info: {
-                name,
-                uid,
-                avatar,
-            }
+      isAuthed,
+      isFetching,
+      error,
+      authedId,
+      [uid]: {
+        lastUpdated,
+        info: {
+          name,
+          uid,
+          avatar,
         }
+      }
     },
     modal: {
-        duck,
-        isOpen,
+      duck,
+      isOpen
     },
     ducks: {
-        isFetching,
-        error,
-        [duckID]: {
-            lastUpdated,
-            info: {
-                avatar
-                duckID
-                name
-                text 
-                timestamp
-                uid
-            }
+      [duckId]: {
+        lastUpdated,
+        info: {
+          avatar,
+          duckId,
+          name,
+          text,
+          timestamp,
+          uid,
         }
-    },
-    usersDucks: {
-        isFetching,
-        error,
-        [uid]: {
-            lastUpdated,
-            duckIds: [duckID, duckID, duckID]
-        }
+      }
     },
     likeCount: {
-        [duckId]: 0 
+      [duckId]: 0
+    },
+    usersDucks: {
+      isFetching,
+      error,
+      [uid]: {
+        lastUpdated,
+        duckIds: [duckId, duckId, duckId]
+      }
     },
     usersLikes: {
-        [duckId]: true
-    },
+      duckid: true,
+    }
+    feed: {
+      isFetching,
+      error,
+      newDucksAvailable,
+      duckIdsToAdd: [duckId, duckId],
+      duckIds: [duckid, duckId, duckId]
+    }
     replies: {
-        isFetching,
-        error,
-        [duckId]: {
-            replies: {
-                lastUpdated,
-                [replyId]: {
-                    name
-                    comment
-                    uid
-                    timestamp
-                    avatar
-                }
-            }
+      isFetching,
+      error,
+      [duckId]: {
+        lastUpdated,
+        replies: {
+          [replyId]: {
+            name,
+            reply,
+            uid,
+            timestamp,
+            avatar
+          }
         }
+      }
     },
     listeners: {
-        [listenersId]: true
-    },
-    feed: {
-        isFetching,
-        error,
-        newDucksAvailable,
-        duckIdsToAdd: [duckId, duckId],
-        duckIds: [duckId, duckId]
-    },
-}
+      [listenerId]: true
+    }
+  }

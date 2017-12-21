@@ -436,4 +436,93 @@ const initialUsersDuckState = {
     }
   }
   
+//Replies 
+// 17:20, most complex reducer
+
+//Replies
+const initialReply = {
+    name: '',
+    reply: '',
+    uid: '',
+    timestamp: 0,
+    avatar: '',
+    replyId: '',
+  }
+  
+  function duckReplies (state = initialReply, action) {
+    switch (action.type) {
+      case ADD_REPLY :
+      //Slice of state containing only .replies. Set new key value pair, Reply id: Reply
+        return {
+          ...state,
+          [action.reply.replyId]: action.reply,
+        }
+      case REMOVE_REPLY :
+        return {
+          ...state,
+          [action.reply.replyId]: undefined,
+        }
+      default :
+        return state
+    }
+  }
+  
+  const initialDuckState = {
+    lastUpdated: Date.now(),
+    replies: {},
+  }
+  
+  function repliesAndLastUpated (state = initialDuckState, action) {
+    switch (action.type) {
+      case FETCHING_REPLIES_SUCCESS :
+        return {
+          ...state,
+          lastUpdated: action.lastUpdated,
+          replies: action.replies,
+        }
+      case ADD_REPLY :
+      case REMOVE_REPLY :
+        //More nested data, make duckReplies reducer
+        return {
+          ...state,
+          replies: duckReplies(state.replies, action),
+        }
+      default :
+        return state
+    }
+  }
+  
+  const initialState = {
+    isFetching: true,
+    error: '',
+  }
+  
+  export default function replies (state = initialState, action) {
+    switch (action.type) {
+      case FETCHING_REPLIES :
+        return {
+          ...state,
+          isFetching: true,
+        }
+      case FETCHING_REPLIES_ERROR :
+      case ADD_REPLY_ERROR :
+        return {
+          ...state,
+          isFetching: false,
+          error: action.error,
+        }
+      case ADD_REPLY :
+      case FETCHING_REPLIES_SUCCESS :
+      case REMOVE_REPLY :
+      //because data is nested, best to deal with it using another reducer (repliesAndLastUpdated)
+        return {
+          ...state,
+          isFetching: false,
+          error: '',
+          [action.duckId]: repliesAndLastUpated(state[action.duckId], action),
+        }
+      default :
+        return state
+    }
+  }
 
