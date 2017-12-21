@@ -225,7 +225,7 @@ function feed (state, action) {
 
 //Listeners 
 
-export default function Listeners (state = {}, action) {
+export default function listeners (state = {}, action) {
     switch (action.type) {
         case ADD_LISTENER :
             return {
@@ -261,6 +261,54 @@ export default function modal (state = initialState, action) {
                 ...state,
                 duckText: action.newDuckText,
             }
+        default :
+            return state
+    }
+}
+
+//usersLikes
+
+const initialState = {
+    isFetching: false,
+    error: '',
+}
+
+export default function usersLikes (state = initialState, action) {
+    switch (action.type) {
+        case FETCHING_LIKES :
+            return {
+                ...state,
+                isFetching: true,
+            }
+        case FETCHING_LIKES_ERROR :
+            return {
+                ...state,
+                isFetching: false,
+                error: action.error, 
+            }
+        case FETCHING_LIKES_SUCCESS:
+        //old state with new likes added on to it
+            return {
+                ...state,
+                ...action.likes,
+                isFetching: false,
+                error: '',
+            }
+        case ADD_LIKE:
+            return {
+                [action.duckId]: true,
+            }
+        case REMOVE_LIKE:
+        // Remove a specific item from an object (duckId from an object...) 9:30 video 6 pt.2
+        // Loop over every duckId in state
+        // Filter out every duckId that matches the duckId we receive from the action, returns array with specific duckId removed
+        // We don't want state to be an array we want an object so we reduce into in object, then return it
+            return Object.keys(state)
+                .filter((duckId) => action.duckId !== duckId)
+                .reduce((prev, current) => {
+                    prev[current] = state[current]
+                    return prev
+                }, {})
         default :
             return state
     }
