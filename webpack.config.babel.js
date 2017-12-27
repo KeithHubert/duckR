@@ -39,7 +39,8 @@ const base = {
     ],
   },
   resolve: {
-    root: path.resolve('./app'),
+    // modules: [path.resolve('./app')]
+    modules: [path.resolve('./app', 'src'), 'node_modules'],
   },
 }
 
