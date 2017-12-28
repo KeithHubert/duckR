@@ -40,7 +40,7 @@ const base = {
   },
   resolve: {
     // modules: [path.resolve('./app')]
-    modules: [path.resolve('./app', 'src'), 'node_modules'],
+    modules: [path.resolve(__dirname, "app"), "node_modules"]
   },
 }
 
