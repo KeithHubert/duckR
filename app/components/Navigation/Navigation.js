@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import { container, navContainer, link } from './styles.css'
 
-// Navigation.propTypes = ActionLinks.propTypes = NavLinks.propTypes = {
-//   isAuthed: PropTypes.bool.isRequired,
-// }
+Navigation.propTypes = ActionLinks.propTypes = NavLinks.propTypes = {
+  isAuthed: PropTypes.bool.isRequired,
+}
 
 function NavLinks ({isAuthed}) {
   return isAuthed === true
