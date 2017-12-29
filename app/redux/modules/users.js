@@ -33,7 +33,7 @@ const initialState = {
     authedId: ''
 }
 
-function users(state = initialState, action) {
+export default function users(state = initialState, action) {
     switch (action.type) {
         case AUTH_USER:
             return {
