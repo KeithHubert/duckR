@@ -10,11 +10,6 @@ import * as userActionCreators from 'redux/modules/users'
 class AuthenticateContainer extends React.Component {
   handleAuth () {
     this.props.fetchAndHandleAuthedUser()
-    auth().then((user) => {
-      this.props.fetchingUserSuccess(user.uid, user, Date.now())
-      this.props.authUser(user.id)
-    })
-      .catch((error) => userActionCreators.fetchingUserFailure(error))
   }
   render () {
     return (
