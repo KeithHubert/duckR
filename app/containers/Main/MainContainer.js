@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Navigation } from 'components'
 import { container, innerContainer } from './styles.css'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+
 
 class MainContainer extends Component {
   render () {
@@ -21,8 +23,7 @@ MainContainer.propTypes = {
   isAuthed: PropTypes.bool.isRequired,
 }
 
-export default connect(
-  (state) => ({isAuthed: state.isAuthed})
-)(MainContainer)
-
+export default withRouter(connect(
+  (state) => ({ isAuthed: state.isAuthed })
+)(MainContainer))
 // (state) => ({isAuthed: state.isAuthed}) = mapToState
