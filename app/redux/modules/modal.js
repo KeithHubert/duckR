@@ -29,19 +29,19 @@ export default function modal (state = initialState, action) {
     }
 }
 
-function openModal () {
+export function openModal () {
     return {
     type: OPEN_MODAL,
     }
 }
 
-function closeModal () {
+export function closeModal () {
     return {
     type: CLOSE_MODAL,
     }
 }
 
-function updateDuckText () {
+export function updateDuckText () {
     return {
     type: UPDATE_DUCK_TEXT,
     newDuckText,
