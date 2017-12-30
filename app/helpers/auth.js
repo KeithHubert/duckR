@@ -1,15 +1,16 @@
-import { ref, firebaseAuth } from 'config/constats'
+import { ref, firebaseAuth } from 'config/constants'
+import firebase from 'firebase'
 
 export default function auth () {
   return firebaseAuth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
 }
 
 export function checkIfAuthed (store) {
-  return store.getState().isAuthed
+  return store.getState().isAuthed === true
 }
 
 export function logout () {
-  return firebaseAuth().signout()
+  return firebaseAuth().signOut()
 }
 
 export function saveUser (user) {
