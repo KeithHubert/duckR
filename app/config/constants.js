@@ -7,5 +7,8 @@ const config = {
     projectId: "dukr-1beb8",
     storageBucket: "dukr-1beb8.appspot.com",
     messagingSenderId: "896429295441"
-  };
-  firebase.initializeApp(config);
+}
+firebase.initializeApp(config);
+
+export const ref = firebase.database().ref()
+export const firebaseAuth = firebase.auth
