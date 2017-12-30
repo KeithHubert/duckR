@@ -24,3 +24,5 @@ MainContainer.propTypes = {
 export default connect(
   (state) => ({isAuthed: state.isAuthed})
 )(MainContainer)
+
+// (state) => ({isAuthed: state.isAuthed}) = mapToState
