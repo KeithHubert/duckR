@@ -1,20 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import getRoutes from 'config/routes'
-import users from 'redux/modules/users'
 import thunk from 'redux-thunk'
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { checkIfAuthed } from 'helpers/auth'
 
-const store = createStore(users, compose(
+// will look at modules folder for anything being exported from index.js will be a property of reducers obj
+import * as reducers from 'redux/modules'
+
+// add reducers instead of one user obj
+const store = createStore(combineReducers(reducers), compose(
   applyMiddleware(thunk),
   // does window.devToolsExtension() exist? if so fire it up, otherwise return 1st arg
   window.devToolsExtension ? window.devToolsExtension() : (f) => f,
 ))
 
 function checkAuth (nextState, replace) {
-  if (store.getState().isFetching === true) {
+  if (store.getState().users.isFetching === true) {
     return
   }
   const isAuthed = checkIfAuthed(store)
