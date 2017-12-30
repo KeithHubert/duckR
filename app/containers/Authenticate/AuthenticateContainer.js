@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Authenticate } from 'components'
 import * as userActionCreators from 'redux/modules/users'
-import auth from 'helpers/auth'
 
 class AuthenticateContainer extends Component {
   constructor (props) {

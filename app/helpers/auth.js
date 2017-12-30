@@ -12,6 +12,6 @@ export function checkIfAuthed (store) {
   return store.getState().isAuthed
 }
 
-// export function logout () {
-//   console.log('Logged Out!')
-// }
+export function logout () {
+  console.log('Logged Out!')
+}
