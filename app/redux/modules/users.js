@@ -139,10 +139,10 @@ export default function users (state = initialState, action) {
           [action.uid]: user(state[action.uid], action),
         }
     case REMOVE_FETCHING_USER:
-        return {
-          ...state,
-          isFetching: false,
-        }
+      return {
+        ...state,
+        isFetching: false,
+      }
     default :
       return state
   }

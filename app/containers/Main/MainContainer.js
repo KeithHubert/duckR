@@ -46,7 +46,7 @@ MainContainer.propTypes = {
   authUser: PropTypes.func.isRequired,
   fetchingUserSuccess: PropTypes.func.isRequired,
   removeFetchingUser: PropTypes.func.isRequired,
-  isFetching: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
 }
 
 export default connect(
