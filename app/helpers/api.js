@@ -22,7 +22,7 @@ function saveLikeCount (duckId) {
 }
 
 // encaps all our invocations to the above async functions
-function saveDuck (duck) {
+export function saveDuck (duck) {
   const { duckId, duckPromise } = saveToDucks(duck)
 
   return Promise.all([

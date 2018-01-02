@@ -33,8 +33,9 @@ Modal.propTypes = {
 
 export default function Modal (props) {
   function submitDuck () {
-    console.log('user', props.user)
-    console.log('text', props.duckText)
+    // persist duck to firebase, fan out to our Redux properties on our state that care about it
+    // stateless functional component does not need keyword 'this'
+    props.duckFanout(formatDuck(props.duckText, props.user))
   }
   return (
     <span className={darkBtn} onClick={props.isOpen ? undefined : props.openModal}>
