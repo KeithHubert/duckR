@@ -50,6 +50,7 @@ function addMultipleDucks (ducks) {
   }
 }
 
+// in charge of persisting duck to firebase, closing modal, adding duck and to usersDucks
 export function duckFanout (duck) {
   return function (dispatch, getState) {
     const uid = getState().users.authedId

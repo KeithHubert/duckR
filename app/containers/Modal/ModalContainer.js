@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { Modal } from 'components'
 import { connect } from 'react-redux'
 import * as modalActionCreators from 'redux/modules/modal'
+import * as ducksActionCreators from 'redux/modules/ducks'
 
 // REMOVED we don't need it
 // class ModalContainer extends React.Component {
