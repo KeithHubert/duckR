@@ -31,3 +31,16 @@ export function saveDuck (duck) {
     saveLikeCount(duckId),
   ]).then(() => ({...duck, duckId}))
 }
+
+// listen to 'ducks' endpoint, on the event of a change run function with snapshot
+export function listenToFeed (cb, errorCB) {
+  ref.child('ducks').on('value', (spanshot) => {
+    const feed = snapshot.val() || {}
+    // sort entire feed, give back IDs sorted by timestamp
+    const sortedIds = Object.keys(feed).sort((a, b) => {
+      return feed[b].timesptamp = feed[a].timestamp
+    })
+    // return feed
+    cb({feed, sortedIds})
+  }, errorCB)
+}
