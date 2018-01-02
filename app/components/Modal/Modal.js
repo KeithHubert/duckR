@@ -5,6 +5,7 @@ import { default as ReactModal } from 'react-modal'
 import {
   newDuckTop, pointer, newDuckInputContainer,
   newDuckInput, submitDuckBtn, darkBtn } from './styles.css'
+import { formatDuck } from 'helpers/utils'
 
 // ReactModal takes object as style
 const modalStyles = {
@@ -27,6 +28,7 @@ Modal.propTypes = {
   openModal: func.isRequired,
   updateDuckText: func.isRequired,
   user: object.isRequired,
+  duckFanout: func.isRequired,
 }
 
 export default function Modal (props) {

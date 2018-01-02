@@ -31,7 +31,7 @@ function mapStateToProps ({modal, users}) {
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators(modalActionCreators, dispatch)
+  return bindActionCreators({...modalActionCreators, ...ducksActionCreators}, dispatch)
 }
 
 // Takes mapStateToProps and mapDispatchToProps and passes them directly to Modal
