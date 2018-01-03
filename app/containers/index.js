@@ -10,5 +10,6 @@ export LogoutContainer from "./Logout/LogoutContainer"
 export ModalContainer from './Modal/ModalContainer'
 export DuckContainer from "./Duck/DuckContainer"
 export UserContainer from './User/UserContainer'
+export DuckDetailsContainer from './DuckDetails/DuckDetailsContainer'
 
 // npm install babel-eslint@next --save-dev to get around linter

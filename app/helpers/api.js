@@ -39,7 +39,7 @@ export function listenToFeed (cb, errorCb) {
     const sortedIds = Object.keys(feed).sort((a, b) => {
       return feed[b].timestamp - feed[a].timestamp
     })
-    
+
     let initialFetch = timesCalled++ <= 0
     cb({feed, sortedIds}, initialFetch)
   }, errorCb)
@@ -87,4 +87,14 @@ export function fetchUsersDucks (uid) {
 export function fetchUser (uid) {
   return ref.child(`users/${uid}`).once('value')
     .then((snapshot) => snapshot.val())
+}
+
+export function fetchDuck (duckId) {
+  return ref.child(`ducks/${duckId}`).once('value')
+    .then((snapshot) => snapshot.val())
+}
+
+export function fetchLikeCount (duckId) {
+  return ref.child(`likeCount/${duckId}`).once('value')
+    .then((snapshot) => snapshot.val() || 0)
 }
