@@ -6,7 +6,7 @@ import { Duck } from 'components'
 import * as usersLikesActions from 'redux/modules/usersLikes'
 
 class DuckContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.handleClick = this.handleClick.bind(this)
@@ -34,7 +34,7 @@ class DuckContainer extends Component {
 }
 
 DuckContainer.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 }
 
 DuckContainer.propTypes = {
@@ -44,7 +44,7 @@ DuckContainer.propTypes = {
   hideLikeCount: PropTypes.bool.isRequired,
   hideReplyBtn: PropTypes.bool.isRequired,
   handleDeleteLike: PropTypes.func.isRequired,
-  addAndHandleLike: PropTypes.func.isRequired
+  addAndHandleLike: PropTypes.func.isRequired,
 }
 
 DuckContainer.defaultProps = {
@@ -58,7 +58,7 @@ function mapStateToProps ({ ducks, likeCount, usersLikes }, props) {
     hideLikeCount: props.hideLikeCount,
     hideReplyBtn: props.hideReplyBtn,
     isLiked: usersLikes[props.duckId] === true,
-    numberOfLikes: likeCount[props.duckId]
+    numberOfLikes: likeCount[props.duckId],
   }
 }
 
