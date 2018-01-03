@@ -44,7 +44,8 @@ export default function Modal (props) {
         ariaHideApp={false}
         style={modalStyles}
         isOpen={props.isOpen}
-        onRequestClose={props.closeModal}>
+        onRequestClose={props.closeModal}
+        contentLabel='Modal'>
         <div className={newDuckTop}>
           <span> {'Compose a new Duck'} </span>
           <span onClick={props.closeModal} className={pointer}> {'x'} </span>

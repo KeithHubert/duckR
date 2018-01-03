@@ -1,17 +1,22 @@
 import React from 'react'
-import { Router, Route, hashHistory, IndexRoute } from 'react-router'
-import {
-  MainContainer, HomeContainer, AuthenticateContainer, FeedContainer, LogoutContainer } from 'containers'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { 
+  MainContainer, HomeContainer, AuthenticateContainer, 
+  FeedContainer, LogoutContainer, UserContainer, DuckDetailsContainer } from 'containers'
 
 export default function getRoutes (checkAuth) {
   return (
-    <Router history={hashHistory}>
-      <Route path='/' component={MainContainer}>
-        <Route path='auth' component={AuthenticateContainer} onEnter={checkAuth} />
-        <Route path='feed' component={FeedContainer} onEnter={checkAuth} />
-        <Route path='logout' component={LogoutContainer} />
-        <IndexRoute component={HomeContainer} onEnter={checkAuth}/>
-      </Route>
+    <Router>
+      <MainContainer>
+        <Switch>
+          <Route exact={true} path='/' component={checkAuth(HomeContainer)} />
+          <Route path='/login' component={checkAuth(AuthenticateContainer)} />
+          <Route path='/feed' component={checkAuth(FeedContainer)} />
+          <Route path='/duck-detail/:duckId' component={checkAuth(DuckDetailsContainer)}/>
+          <Route path='/:uid' component={checkAuth(UserContainer)}/>
+          <Route path='/logout' component={LogoutContainer} />
+        </Switch>
+      </MainContainer>
     </Router>
   )
 }
