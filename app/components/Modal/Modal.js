@@ -5,6 +5,7 @@ import { default as ReactModal } from 'react-modal'
 import {
   newDuckTop, pointer, newDuckInputContainer,
   newDuckInput, submitDuckBtn, darkBtn } from './styles.css'
+import { formatDuck } from 'helpers/utils'
 
 // ReactModal takes object as style
 const modalStyles = {
@@ -27,12 +28,14 @@ Modal.propTypes = {
   openModal: func.isRequired,
   updateDuckText: func.isRequired,
   user: object.isRequired,
+  duckFanout: func.isRequired,
 }
 
 export default function Modal (props) {
   function submitDuck () {
-    console.log('user', props.user)
-    console.log('text', props.duckText)
+    // persist duck to firebase, fan out to our Redux properties on our state that care about it
+    // stateless functional component does not need keyword 'this'
+    props.duckFanout(formatDuck(props.duckText, props.user))
   }
   return (
     <span className={darkBtn} onClick={props.isOpen ? undefined : props.openModal}>
@@ -41,7 +44,8 @@ export default function Modal (props) {
         ariaHideApp={false}
         style={modalStyles}
         isOpen={props.isOpen}
-        onRequestClose={props.closeModal}>
+        onRequestClose={props.closeModal}
+        contentLabel='Modal'>
         <div className={newDuckTop}>
           <span> {'Compose a new Duck'} </span>
           <span onClick={props.closeModal} className={pointer}> {'x'} </span>

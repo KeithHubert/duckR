@@ -5,9 +5,15 @@ import thunk from 'redux-thunk'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { checkIfAuthed } from 'helpers/auth'
+import restricted from 'helpers/restricted'
+
 
 // will look at modules folder for anything being exported from index.js will be a property of reducers obj
 import * as reducers from 'redux/modules'
+
+function checkAuth (component) {
+  return restricted(component, store)
+}
 
 // add reducers instead of one user obj
 const store = createStore(combineReducers(reducers), compose(
@@ -37,6 +43,7 @@ ReactDOM.render(
   <Provider store={store}>
     {getRoutes(checkAuth)}
   </Provider>,
-document.getElementById('app'))
+  document.getElementById('app')
+)
 
 // replacing routes with getRoutes and passing down checkAuth
