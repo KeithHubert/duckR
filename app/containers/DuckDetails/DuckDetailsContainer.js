@@ -5,12 +5,12 @@ import { connect } from 'react-redux'
 import { DuckDetails } from 'components'
 import * as duckActionCreators from 'redux/modules/ducks'
 import * as likeCountActionCreators from 'redux/modules/likeCount'
-// import * as repliesActionCreators from 'redux/modules/replies'
+import * as repliesActionCreators from 'redux/modules/replies'
 
 class DuckDetailsContainer extends Component {
   componentDidMount () {
     this.props.initLikeFetch(this.props.duckId)
-    if(this.props.duckAlreadyFetched === false) {
+    if (this.props.duckAlreadyFetched === false) {
       this.props.fetchAndHandleDuck(this.props.duckId)
     } else {
       this.props.removeFetching()
@@ -19,7 +19,7 @@ class DuckDetailsContainer extends Component {
 
   render () {
     return (
-      <DuckDetails 
+      <DuckDetails
         authedUser={this.props.authedUser}
         duckId={this.props.duckId}
         isFetching={this.props.isFetching}
@@ -38,10 +38,10 @@ DuckDetailsContainer.propTypes = {
   removeFetching: PropTypes.func.isRequired,
   fetchAndHandleDuck: PropTypes.func.isRequired,
   initLikeFetch: PropTypes.func.isRequired,
-  addAndHandleReply: PropTypes.func.isRequired
+  addAndHandleReply: PropTypes.func.isRequired,
 }
 
-function mapStateToProps({ ducks, likeCount, users }, props) {
+function mapStateToProps ({ ducks, likeCount, users }, props) {
   const duckId = props.match.params.duckId
   return {
     duckId,
@@ -54,9 +54,9 @@ function mapStateToProps({ ducks, likeCount, users }, props) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    ...duckActionCreators, 
+    ...duckActionCreators,
     ...likeCountActionCreators,
-    ...repliesActionCreators
+    ...repliesActionCreators,
   }, dispatch)
 }
 
