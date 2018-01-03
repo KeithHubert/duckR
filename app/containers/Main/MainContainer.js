@@ -10,7 +10,6 @@ import { formatUserInfo } from 'helpers/utils'
 import { firebaseAuth } from 'config/constants'
 import { withRouter } from 'react-router'
 
-
 class MainContainer extends Component {
   componentDidMount () {
     firebaseAuth().onAuthStateChanged((user) => {
@@ -19,11 +18,12 @@ class MainContainer extends Component {
         const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid)
         this.props.authUser(user.uid)
         this.props.fetchingUserSuccess(user.uid, userInfo, Date.now())
-        if (this.props.location.pathname === '/feed') {
+        this.props.setUsersLikes()
+        if (this.props.location.pathname === '/') {
           this.context.router.history.replace('feed')
         }
       } else {
-        // allows render to fire UI below
+        // allows ui to render
         this.props.removeFetchingUser()
       }
     })
@@ -50,6 +50,7 @@ MainContainer.propTypes = {
   fetchingUserSuccess: PropTypes.func.isRequired,
   removeFetchingUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  setUsersLikes: PropTypes.func.isRequired,
 }
 
 export default withRouter(connect(
